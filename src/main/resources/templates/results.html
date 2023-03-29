@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>View All Bikes</title>
+</head>
+<body>
+	<h1>All Bike Entries</h1>
+	<form>
+		<table>
+			<tr th:each="currentBike : ${bike}">
+				<td th:text="${currentBike.id}" />
+				<td th:text="${currentBike.bikeModel}" />
+				<td th:text="${currentBike.bikeSpecialty}" />
+				<td th:text="${currentBike.bikePrice}" />
+				<td><a th:href="@{/edit/{id}(id=${currentBike.id})}">Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${currentBike.id})}">Delete</a></td>
+			</tr>
+		</table>
+	</form>
+	<a href="../inputBike">Add a new bike entry</a>
+</body>
+</html>
