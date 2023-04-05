@@ -3,13 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert New Bike</title>
+	<script type="text/javascript">
+		function validate(){
+			
+			if (document.bikeForm.bikeModel.value == ""){
+				alert("Please provide a bike model");
+				document.bikeForm.bikeModel.focus();
+				return false;
+			}
+			else if (document.bikeForm.bikeSpecialty.value == ""){
+				alert("Please provide a bike specialty");
+				document.bikeForm.bikeSpecialty.focus();
+				return false;
+			}
+			else if (document.bikeForm.bikePrice.value == "" || document.bikeForm.bikePrice.value < 0){
+				alert("Please provide a positive value price");
+				document.bikeForm.bikePrice.focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
+
 <body>
 	<h1>Add a Bike Entry</h1>
-	<form th:object="${newBike}" th:action="@{/inputBike}" method='POST'>
-		Bike Model: <input name="bikeModel" size="25" th:field="*{bikeModel}"> <br />
-		Bike Specialty: <input name="bikeSpecialty" size="25" th:field="*{bikeSpecialty}"><br />
-		Price: <input name="bikePrice" size="25" th:field="*{bikePrice}"><br />
+	<form th:object="${newBike}" th:action="@{/inputBike}" name="bikeForm" method='POST' onsubmit="return(validate());">
+		Bike Model: <input type="text" name="bikeModel" size="25" th:field="*{bikeModel}"> <br />
+		Bike Specialty: <input type="text" name="bikeSpecialty" size="25" th:field="*{bikeSpecialty}"><br />
+		Price: <input type="text" name="bikePrice" size="25" th:field="*{bikePrice}"><br />
 		<input name="submit" type="submit" value="submit" />
 	</form>
 	<a href="../viewAll">View all Bikes</a>
